@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Budget</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+<style>
+    body {
+        background-image: url('images/background.jpg');
+        background-size: cover; /* Ensure the background covers the entire page */
+        background-repeat: no-repeat; /* Prevent the image from repeating */
+        background-position: center center; /* Center the image */
+        font-family: Arial, sans-serif; /* Optional: Set a default font for the page */
+        color: white; /* Optional: Set default text color for better readability on dark backgrounds */
+    }
+
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Budget Calculator</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="calculate.html">Calculate Budget</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 class="text-center">Calculate Your Budget</h1>
+        <form id="budgetForm">
+            <div class="mb-3">
+                <label for="salary" class="form-label">Monthly Salary</label>
+                <input type="number" class="form-control" id="salary" required>
+            </div>
+            <div class="mb-3">
+                <label for="groceries" class="form-label">Groceries</label>
+                <input type="number" class="form-control" id="groceries" required>
+            </div>
+            <div class="mb-3">
+                <label for="rent" class="form-label">Rent</label>
+                <input type="number" class="form-control" id="rent" required>
+            </div>
+            <div class="mb-3">
+                <label for="car" class="form-label">Car Petrol</label>
+                <input type="number" class="form-control" id="car" required>
+            </div>
+            <div class="mb-3">
+                <label for="other" class="form-label">Other Expenses</label>
+                <input type="number" class="form-control" id="other" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="calculateBudget()">Calculate</button>
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset</button>
+        </form>
+        <div class="mt-4">
+            <h3>TotalBudget: <span id="totalExpenses">0</span></h3>
+            <h3>Savings: <span id="remainingSalary">0</span></h3>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function calculateBudget() {
+            const salary = parseFloat(document.getElementById('salary').value);
+            const groceries = parseFloat(document.getElementById('groceries').value);
+            const rent = parseFloat(document.getElementById('rent').value);
+            const car = parseFloat(document.getElementById('car').value);
+            const other = parseFloat(document.getElementById('other').value);
+
+            if (isNaN(salary) || isNaN(groceries) || isNaN(rent) || isNaN(car) || isNaN(other)) {
+                alert('Please fill in all fields with valid numbers.');
+                return;
+            }
+
+            const totalExpenses = groceries + rent + car + other;
+            const remainingSalary = salary - totalExpenses;
+
+            document.getElementById('totalExpenses').textContent = totalExpenses.toFixed(2);
+            document.getElementById('remainingSalary').textContent = remainingSalary.toFixed(2);
+        }
+
+        function resetForm() {
+            document.getElementById('budgetForm').reset();
+            document.getElementById('totalExpenses').textContent = '0';
+            document.getElementById('remainingSalary').textContent = '0';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
